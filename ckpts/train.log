@@ -1,0 +1,93 @@
+2024-02-26 16:08:35,740 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:08:35,741 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:08:35,741 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:11:06,831 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:11:06,831 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:11:06,831 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:16:32,792 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:16:32,794 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:16:32,794 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:30:37,134 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:30:37,148 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:30:37,148 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:32:09,425 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:32:09,425 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:32:09,425 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:53:57,658 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:53:57,658 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:53:57,658 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 16:55:55,468 - Output and logs will be saved to ckpts/train.log
+2024-02-26 16:55:55,468 - ====A NEW TRAINING PROCESS====
+2024-02-26 16:55:55,468 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=1, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 17:14:22,959 - Output and logs will be saved to ckpts/train.log
+2024-02-26 17:14:22,959 - ====A NEW TRAINING PROCESS====
+2024-02-26 17:14:22,959 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 17:15:30,549 - Output and logs will be saved to ckpts/train.log
+2024-02-26 17:15:30,549 - ====A NEW TRAINING PROCESS====
+2024-02-26 17:15:30,549 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 17:23:52,570 - Output and logs will be saved to ckpts/train.log
+2024-02-26 17:23:52,570 - ====A NEW TRAINING PROCESS====
+2024-02-26 17:23:52,570 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 17:29:07,728 - Output and logs will be saved to ckpts/train.log
+2024-02-26 17:29:07,728 - ====A NEW TRAINING PROCESS====
+2024-02-26 17:29:07,728 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 19:03:34,452 - Output and logs will be saved to ckpts/train.log
+2024-02-26 19:03:34,456 - ====A NEW TRAINING PROCESS====
+2024-02-26 19:03:34,456 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 19:28:50,234 - Output and logs will be saved to ckpts/train.log
+2024-02-26 19:28:50,238 - ====A NEW TRAINING PROCESS====
+2024-02-26 19:28:50,238 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 19:44:37,935 - Output and logs will be saved to ckpts/train.log
+2024-02-26 19:44:37,935 - ====A NEW TRAINING PROCESS====
+2024-02-26 19:44:37,935 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 21:12:58,307 - Output and logs will be saved to ckpts/train.log
+2024-02-26 21:12:58,307 - ====A NEW TRAINING PROCESS====
+2024-02-26 21:12:58,307 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 21:33:24,038 - Output and logs will be saved to ckpts/train.log
+2024-02-26 21:33:24,038 - ====A NEW TRAINING PROCESS====
+2024-02-26 21:33:24,038 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 21:43:11,449 - Output and logs will be saved to ckpts/train.log
+2024-02-26 21:43:11,449 - ====A NEW TRAINING PROCESS====
+2024-02-26 21:43:11,453 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 21:45:34,561 - Output and logs will be saved to ckpts/train.log
+2024-02-26 21:45:34,561 - ====A NEW TRAINING PROCESS====
+2024-02-26 21:45:34,561 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 21:52:46,467 - Output and logs will be saved to ckpts/train.log
+2024-02-26 21:52:46,468 - ====A NEW TRAINING PROCESS====
+2024-02-26 21:52:46,468 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:03:09,770 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:03:09,770 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:03:09,770 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:04:56,698 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:04:56,699 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:04:56,699 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:05:35,971 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:05:35,971 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:05:35,972 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:07:33,236 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:07:33,236 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:07:33,236 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:08:04,661 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:08:04,662 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:08:04,662 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-26 22:14:10,958 - Output and logs will be saved to ckpts/train.log
+2024-02-26 22:14:10,959 - ====A NEW TRAINING PROCESS====
+2024-02-26 22:14:10,959 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 16:56:38,613 - Output and logs will be saved to ckpts/train.log
+2024-02-27 16:56:38,613 - ====A NEW TRAINING PROCESS====
+2024-02-27 16:56:38,614 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 17:04:38,228 - Output and logs will be saved to ckpts/train.log
+2024-02-27 17:04:38,229 - ====A NEW TRAINING PROCESS====
+2024-02-27 17:04:38,230 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 17:06:06,789 - Output and logs will be saved to ckpts/train.log
+2024-02-27 17:06:06,790 - ====A NEW TRAINING PROCESS====
+2024-02-27 17:06:06,791 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 20:14:20,111 - Output and logs will be saved to ckpts/train.log
+2024-02-27 20:14:20,111 - ====A NEW TRAINING PROCESS====
+2024-02-27 20:14:20,111 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 20:15:38,719 - Output and logs will be saved to ckpts/train.log
+2024-02-27 20:15:38,719 - ====A NEW TRAINING PROCESS====
+2024-02-27 20:15:38,719 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
+2024-02-27 21:43:21,378 - Output and logs will be saved to ckpts/train.log
+2024-02-27 21:43:21,378 - ====A NEW TRAINING PROCESS====
+2024-02-27 21:43:21,378 - Namespace(num_steps=100, checkpoint_dir='ckpts/', lr=0.0002, root='E:\\Git\\Papers\\TMA\\dsec', crop_size=[288, 384], batch_size=2, num_workers=0, grad_clip=1, weight=0.8, wandb=False)
