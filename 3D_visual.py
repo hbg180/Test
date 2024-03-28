@@ -28,6 +28,6 @@ ax.set_zlim((0, 260))
 ax.set_xlabel('T/us')  # 画出坐标轴
 ax.set_ylabel('X')
 ax.set_zlabel('Y')
-# plt.show()
+plt.show()
 
 

@@ -14,6 +14,7 @@ from encoders import twins_svt_large
 from configs.mvsec import get_cfg
 # import flow_viz
 from sk_update import SKMotionEncoder6_Deep_nopool_res, SKUpdateBlock6_Deep_nopoolres_AllDecoder
+from cbam import CBAM
 
 
 class TMA(nn.Module):
@@ -55,6 +56,9 @@ class TMA(nn.Module):
             print("[Using basic as motion feature encoder]")
             self.update = UpdateBlock(hidden_dim=128, split=self.split)
 
+        if cfg.cbam:
+            self.cbam = CBAM(256,2,3)
+
     def upsample_flow(self, flow, mask, scale=8):
         """ Upsample flow field [H/8, W/8, 2] -> [H, W, 2] using convex combination """
         N, _, H, W = flow.shape
@@ -80,6 +84,8 @@ class TMA(nn.Module):
         # Context map [net, inp]
         # voxels = torch.cat([fm for fm in voxels], dim=0)
         cmap = self.cnet(torch.cat(voxels, dim=1))  # 6*(2,3,288,384)->[2,18,288,384]->[2,256,36,48]
+        if self.cbam:
+            cmap = self.cbam(cmap)
         net, inp = torch.split(cmap, [128, 128], dim=1)
         net = torch.tanh(net)
         inp = torch.relu(inp)

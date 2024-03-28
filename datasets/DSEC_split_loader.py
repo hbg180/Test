@@ -1,12 +1,13 @@
 import numpy as np
 import torch
 import torch.utils.data as data
-
+import sys
 import random
 import os
 import glob
+sys.path.append(os.getcwd())
 
-from augument import Augumentor
+from .augument import Augumentor
 
 class DSECsplit(data.Dataset):
     def __init__(self, phase):
@@ -21,7 +22,7 @@ class DSECsplit(data.Dataset):
             self.root = 'DSEC_split/train'
             self.augmentor = Augumentor(crop_size=[288, 384])
         else:
-            self.root = 'DSEC_split/test'
+            self.root = 'E:/Git/Papers/TMA/dsec/test'
 
 
         self.files = glob.glob(os.path.join(self.root, '*', 'seq_*.npz'))

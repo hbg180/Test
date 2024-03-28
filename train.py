@@ -50,14 +50,14 @@ def print_args(args):
     print('---------------------------')
 
 
-def sequence_loss(flow_preds, flow_gt, valid, gamma):
+def sequence_loss(flow_preds, flow_gt, valid, gamma=0.8, max_flow=MAX_FLOW):
     """ Loss function defined over sequence of flow predictions """
-
-    n_predictions = len(flow_preds)    
+    n_predictions = len(flow_preds)
     flow_loss = 0.0
 
-    # exclude invalid pixels and extremely large displacements
-    valid = (valid >= 0.5) & ((flow_gt**2).sum(dim=1).sqrt() < MAX_FLOW)
+    # exlude invalid pixels and extremely large diplacements
+    mag = torch.sum(flow_gt**2, dim=1).sqrt()#b,h,w
+    valid = (valid >= 0.5) & (mag < max_flow)#b,1,h,w
 
     for i in range(n_predictions):
         i_weight = gamma**(n_predictions - i - 1)
@@ -75,16 +75,6 @@ def sequence_loss(flow_preds, flow_gt, valid, gamma):
     }
 
     return flow_loss, metrics
-
-
-def fetch_optimizer(args, model):
-    """ Create the optimizer and learning rate scheduler """
-    optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wdecay, eps=args.epsilon)
-
-    scheduler = optim.lr_scheduler.OneCycleLR(optimizer=optimizer, max_lr=args.lr, total_steps=args.num_steps+100,
-                                            pct_start=0.05, cycle_momentum=False, anneal_strategy='linear')
-
-    return optimizer, scheduler
 
 
 class Logger:
@@ -159,17 +149,24 @@ def main(args):
     #     model.module.freeze_bn()
 
     train_loader = make_data_loader(args, args.batch_size, args.num_workers)
-    optimizer, scheduler = fetch_optimizer(args, model)
+    optimizer = torch.optim.AdamW(model.parameters(), args.lr, weight_decay=0.0001)
+    scheduler = torch.torch.optim.lr_scheduler.OneCycleLR(
+            optimizer,
+            max_lr=args.lr,
+            total_steps=args.num_steps + 100,
+            pct_start=0.01,
+            cycle_momentum=False,
+            anneal_strategy='linear')
 
-    scaler = GradScaler(enabled=args.mixed_precision)
+    # scaler = GradScaler(enabled=args.mixed_precision)
     logger = Logger(model, scheduler, args)
     sys.stdout = logger
     print_args(args)
     print(f"Parameter Count: {count_parameters(model)}")
 
     while logger.total_steps <= args.num_steps:
-        train(model, train_loader, optimizer, scheduler, logger, scaler, args)
-        if logger.total_steps >= args.num_steps:
+        train(model, train_loader, optimizer, scheduler, logger, args)
+        if logger.total_steps >= args.num_steps:    # 迭代完毕 绘制图像
             plot_train(logger, args)
             plot_val(logger, args)
             break
@@ -187,33 +184,34 @@ def main(args):
     return PATH
 
 
-def train(model, train_loader, optimizer, scheduler, logger, scaler, args):
-    for i_batch, data_blob in enumerate(train_loader):
+def train(model, train_loader, optimizer, scheduler, logger, args, scaler=None):
+    for i_batch, (voxel1, voxel2, flow_map, valid2D) in enumerate(train_loader):
         tic = time.time()
-        image1, image2, flow, valid = [x.cuda() for x in data_blob]
+        # image1, image2, flow, valid = [x.cuda() for x in data_blob]
 
         optimizer.zero_grad()
+        flow_pred = model(voxel1.cuda(), voxel2.cuda(), args.iters)
 
-        flow_pred = model(image1, image2)
-
-        loss, metrics = sequence_loss(flow_pred, flow, valid, args.gamma)
-        scaler.scale(loss).backward()
-        scaler.unscale_(optimizer)
+        flow_loss, loss_metrics = sequence_loss(flow_pred, flow_map.cuda(), valid2D.cuda(), args.weight, MAX_FLOW)
+        flow_loss.backward()
+        # scaler.scale(loss).backward()
+        # scaler.unscale_(optimizer)
 
         torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip)
-        scaler.step(optimizer)
+        # scaler.step(optimizer)
+        optimizer.step()
         scheduler.step()
-        scaler.update()
+        # scaler.update()
         toc = time.time()
 
-        metrics['time'] = toc - tic
-        logger.push(metrics)
+        loss_metrics['time'] = toc - tic
+        logger.push(loss_metrics)
         if logger.total_steps % args.print_freq == args.print_freq - 1 and hasattr(model, "corr_lambdas"):
             print(model.corr_lambdas)
 
         # Validate
-        if logger.total_steps+1 >= args.num_steps//2 and logger.total_steps % args.val_freq == args.val_freq - 1:
-            validate(model, args, logger)
+        if logger.total_steps+1 >= args.num_steps//100 and logger.total_steps % args.val_freq == args.val_freq - 1:
+            # validate(model, args, logger)
             plot_train(logger, args)
             plot_val(logger, args)
             PATH = args.output + f'/{logger.total_steps+1}_{args.name}.pth'
@@ -330,13 +328,13 @@ if __name__ == '__main__':
     parser.add_argument('--restore_ckpt', help="restore checkpoint")
     parser.add_argument('--cnet', type=str, default='basic')
     parser.add_argument('--fnet', type=str, default='basic')
-    parser.add_argument('--mfe', type=str, default='basic')
+    parser.add_argument('--mfe', type=str, default='sk')
+    parser.add_argument('--updater', type=str, default='sk')
     parser.add_argument('--corr_levels', type=int, default=1)
     parser.add_argument('--corr_radius', type=int, default=3)
-    parser.add_argument('--updater', type=str, default='basic')
     parser.add_argument('--k_conv', type=list, default=[1, 15])
     parser.add_argument('--PCUpdater_conv', type=list, default=[1, 7])
-    parser.add_argument('--num_steps', type=int, default=100000)  # 200000
+    parser.add_argument('--num_steps', type=int, default=200000)  # 200000
     parser.add_argument('--checkpoint_dir', type=str, default='ckpts/')
     parser.add_argument('--lr', type=float, default=2e-4)
     parser.add_argument('--wdecay', type=float, default=0.0001)
@@ -344,17 +342,19 @@ if __name__ == '__main__':
     parser.add_argument('--gamma', type=float, default=0.8, help='exponential weighting')
     parser.add_argument('--mixed_precision', default=False, action='store_true',
                         help='use mixed precision')
+    parser.add_argument('--validation', type=str, nargs='+')
 
     # datasets setting
     parser.add_argument('--root', type=str, default='dsec/')
     parser.add_argument('--crop_size', type=list, default=[288, 384])
 
     # dataloader setting                                                      #             慢 慢 快 快
-    parser.add_argument('--batch_size', type=int, default=1)  # batch_size ：4 2  1 1
-    parser.add_argument('--num_workers', type=int, default=2)  # num_workers：1 2  2 3
+    parser.add_argument('--batch_size', type=int, default=2)  # batch_size ：4 2  1 1
+    parser.add_argument('--num_workers', type=int, default=8)  # num_workers：1 2  2 3
 
     # model setting
     parser.add_argument('--grad_clip', type=float, default=1)
+    parser.add_argument('--iters', type=int, default=10)
 
     # loss setting
     parser.add_argument('--weight', type=float, default=0.8)
