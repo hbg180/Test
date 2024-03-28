@@ -80,6 +80,8 @@ class TMA(nn.Module):
         voxelref = x1.chunk(self.split, dim=1)[-1]
         voxels = (voxelref,) + voxels  # [group+1] elements
         fmaps = self.fnet(voxels)  # Tuple(f0, f1, ..., f_g)    # 6*(2,3,288,384)->6*(2,128,36,48)
+        if self.cbam:
+            fmaps = self.cbam(fmaps)
 
         # Context map [net, inp]
         # voxels = torch.cat([fm for fm in voxels], dim=0)
