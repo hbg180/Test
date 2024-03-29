@@ -56,8 +56,12 @@ class TMA(nn.Module):
             print("[Using basic as motion feature encoder]")
             self.update = UpdateBlock(hidden_dim=128, split=self.split)
 
+        self.cbam = False
         if cfg.cbam:
-            self.cbam = CBAM(256,2,3)
+            self.cbam = True
+            # self.cbamC = CBAM(256,2,3)
+            # self.cbamF = CBAM(768, 2, 3)
+            self.cbam = CBAM(128, 16, 7)
 
     def upsample_flow(self, flow, mask, scale=8):
         """ Upsample flow field [H/8, W/8, 2] -> [H, W, 2] using convex combination """
@@ -80,14 +84,15 @@ class TMA(nn.Module):
         voxelref = x1.chunk(self.split, dim=1)[-1]
         voxels = (voxelref,) + voxels  # [group+1] elements
         fmaps = self.fnet(voxels)  # Tuple(f0, f1, ..., f_g)    # 6*(2,3,288,384)->6*(2,128,36,48)
-        if self.cbam:
-            fmaps = self.cbam(fmaps)
+        # if self.cbam:
+        #     fmaps = self.cbamF(torch.cat(fmaps, dim=1))
+        #     fmaps = torch.chunk(fmaps, 6, 1)
 
         # Context map [net, inp]
         # voxels = torch.cat([fm for fm in voxels], dim=0)
         cmap = self.cnet(torch.cat(voxels, dim=1))  # 6*(2,3,288,384)->[2,18,288,384]->[2,256,36,48]
-        if self.cbam:
-            cmap = self.cbam(cmap)
+        # if self.cbam:
+        #     cmap = self.cbamC(cmap)
         net, inp = torch.split(cmap, [128, 128], dim=1)
         net = torch.tanh(net)
         inp = torch.relu(inp)
@@ -118,6 +123,8 @@ class TMA(nn.Module):
             corr_maps = torch.cat(corr_map_list, dim=0)
 
             mfs = self.mfe(torch.cat([flow] * self.split, dim=0), corr_maps)    #[10,128,36,48]
+            if self.cbam:
+                mfs = self.cbam(mfs)
             mfs = mfs.chunk(self.split, dim=0)  #[10,128,36,48]->[5*(2,128,36,48)]
             mfs = self.mpa(mfs)  # 公式（8）MFi^
             mf = torch.cat(mfs, dim=1)  # 5[2,128,36,48]->[2,640,36,48]

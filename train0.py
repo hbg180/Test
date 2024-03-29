@@ -126,7 +126,7 @@ class Trainer:
                 self.tracker.push(self.args, loss_metrics)
                 total_steps += 1
 
-                if total_steps % 5000 == 0:      # 保存模型
+                if total_steps % 10000 == 0:      # 保存模型
                     ckpt = os.path.join(self.args.checkpoint_dir, f'checkpoint_{total_steps}.pth')
                     torch.save(self.model.state_dict(), ckpt)
                 if total_steps > self.args.num_steps:   # 训练结束
@@ -196,8 +196,8 @@ if __name__ == '__main__':
     parser.add_argument('--cnet', type=str, default='basic')
     parser.add_argument('--fnet', type=str, default='basic')
     parser.add_argument('--cbam', type=bool, default=True)
-    parser.add_argument('--mfe', type=str, default='sk')
-    parser.add_argument('--updater', type=str, default='sk')
+    parser.add_argument('--mfe', type=str, default='basic')
+    parser.add_argument('--updater', type=str, default='basic')
     parser.add_argument('--corr_levels', type=int, default=1)
     parser.add_argument('--corr_radius', type=int, default=3)
     parser.add_argument('--k_conv', type=list, default=[1, 15])
